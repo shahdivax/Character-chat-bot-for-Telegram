@@ -92,7 +92,8 @@ def restart(update: Update, context: CallbackContext):
     chat_id = update.message.chat_id
     if chat_id in context.user_data:
         del context.user_data[chat_id]
-    update.message.reply_text("Restarting the conversation. Please use /tony_stark or /harry_potter to chat with the respective characters.")
+    update.message.reply_text("Restarting the conversation. Please use /tony_stark or /harry_potter to chat with the "
+                              "respective characters.")
 
 
 def main():
