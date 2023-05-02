@@ -2,6 +2,10 @@
 
 This repository contains a chat bot designed for Telegram that can chat like famous movie characters such as Tony Stark (Iron Man) and Harry Potter. Engage in fun conversations with your favorite characters and see how they would respond to you.
 
+## Branch Information
+
+All the code for this project is available in the `master` branch. This branch contains the latest updates and improvements to the chat bot. If you encounter any issues or would like to contribute, please submit a pull request or report an issue on the `master` branch.
+
 ## Getting Started
 
 To access the code and set up the chat bot, make sure to use the `master` branch of this repository:
@@ -10,13 +14,6 @@ To access the code and set up the chat bot, make sure to use the `master` branch
 ```
 git clone https://github.com/shahdivax/Character-chat-bot-for-Telegram.git --branch master
 ```
-
-Then, follow the previously mentioned steps to set up and run the chat bot.
-
-## Branch Information
-
-All the code for this project is available in the `master` branch. This branch contains the latest updates and improvements to the chat bot. If you encounter any issues or would like to contribute, please submit a pull request or report an issue on the `master` branch.
-
 2. Change into the project directory:
 ```
 cd Character-chat-bot-for-Telegram
