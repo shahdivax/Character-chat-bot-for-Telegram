@@ -2,7 +2,7 @@ import torch
 from transformers import GPT2Tokenizer, GPT2LMHeadModel
 
 # Load the fine-tuned model and tokenizer
-model = GPT2LMHeadModel.from_pretrained("harry_potter_chatbot") #tony_stark_chatbot
+model = GPT2LMHeadModel.from_pretrained("harry_potter_chatbot")  # use "tony_stark_chatbot" for tony stark
 tokenizer = GPT2Tokenizer.from_pretrained("harry_potter_chatbot")
 
 

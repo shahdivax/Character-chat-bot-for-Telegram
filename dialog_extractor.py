@@ -1,5 +1,8 @@
 import re
 
+
+# Note you should run this file only for tony stark chatbot
+
 def parse_txt(file):
     with open(file, 'r', encoding='utf-8') as f:
         lines = f.readlines()

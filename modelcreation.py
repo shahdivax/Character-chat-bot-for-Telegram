@@ -26,14 +26,15 @@ def create_datasets(dialogues, tokenizer, test_size=0.1):
 
 
 # Load DialoGPT model and tokenizer
-model = GPT2LMHeadModel.from_pretrained("microsoft/DialoGPT-medium")
-tokenizer = GPT2Tokenizer.from_pretrained("microsoft/DialoGPT-medium")
+model = GPT2LMHeadModel.from_pretrained(
+    "microsoft/DialoGPT-medium")  # use "microsoft/DialoGPT-large" for more creativity
+tokenizer = GPT2Tokenizer.from_pretrained("microsoft/DialoGPT-medium")  # "microsoft/DialoGPT-large"
 
 # Set pad token
 tokenizer.pad_token = tokenizer.eos_token
 
 # Read Tony Stark's dialogues from a text file
-dialogues_file = "harry_rows_final.txt" #tony_stark_dialogues.txt
+dialogues_file = "harry_rows_final.txt"  # "tony_stark_dialogues.txt" for tony stark
 tony_dialogues = read_dialogues_from_file(dialogues_file)
 
 # Create train and validation datasets
@@ -65,11 +66,11 @@ trainer = Trainer(
 trainer.train()
 
 # Save the fine-tuned model and tokenizer
-trainer.save_model("harry_potter_chatbot") #tony_stark_chatbot
+trainer.save_model("harry_potter_chatbot")  # use "tony_stark_chatbot" for tony stark
 tokenizer.save_pretrained("harry_potter_chatbot")
 
 # Load the fine-tuned model and use it for generating responses
-model = GPT2LMHeadModel.from_pretrained("harry_potter_chatbot")
+model = GPT2LMHeadModel.from_pretrained("harry_potter_chatbot")  # use "tony_stark_chatbot" for tony stark
 tokenizer = GPT2Tokenizer.from_pretrained("harry_potter_chatbot")
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model.to(device)
@@ -84,6 +85,6 @@ def get_response(user_input, temperature=0.8):
 
 
 # Example: Get a response for a user input
-user_input = "Are you Iron Man?"
+user_input = "Are you harry potter?" # "Are you tony stark?" for tony stark
 response = get_response(user_input, temperature=0.8)
-print(response)
+print("\nresponse : "+response)
