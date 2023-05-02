@@ -3,7 +3,7 @@ import requests
 import re
 
 # Hugging Face API
-API_TOKEN = "your_api_token"  # Replace this with your actual API token
+API_TOKEN = "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"  # Replace this with your actual API token
 API_URL = "https://api-inference.huggingface.co/models/"
 
 
