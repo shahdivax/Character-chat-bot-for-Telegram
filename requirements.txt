@@ -1,5 +1,5 @@
-torch==1.10.1
-transformers==4.12.2
-scikit-learn==1.0.1
-datasets==1.14.0
+torch
+transformers
+scikit-learn
+datasets
 python-telegram-bot==13.7.0
