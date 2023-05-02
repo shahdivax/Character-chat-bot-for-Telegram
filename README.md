@@ -31,19 +31,20 @@ pip install -r requirements.txt
 ```
 python dialog_extractor.py
 ```
+Note: above command is use to create ```tony_stark_dialogues.txt``` file , if you want you can skip this step and use already existing file or else make sure that the new file you created looks like the existing one. 
 
 5. Run `modelcreation.py` to create the chat bot model:
 ```
 python modelcreation.py
 ```
-
-6. Run `bot.py` to run the bot locally for one character at a time, or run `TelegramBotRunner_of_Tonystark.py` to start the bot on Telegram:
+Note: create models for both the characters and then move to step 6.
+6. Run `bot.py` to run the bot locally for one character at a time, or run `telegram_character-bot_runner.py` to start the bot on Telegram:
 ```
 python bot.py
 ```
 or
 ```
-python TelegramBotRunner_of_Tonystark.py
+python telegram_character-bot_runner.py
 ```
 Note : run above command only after you have created models of both the characters
 
