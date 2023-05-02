@@ -1,5 +1,6 @@
-torch
-transformers
-scikit-learn
-datasets
+torch~=2.0.0
+transformers~=4.28.1
+scikit-learn~=1.2.2
+datasets~=2.11.0
 python-telegram-bot==13.7.0
+streamlit
