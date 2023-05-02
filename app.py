@@ -1,14 +1,10 @@
 import streamlit as st
-from transformers import GPT2Tokenizer, GPT2LMHeadModel
+import requests
 import re
 
-
-# Load the models and tokenizers
-tony_stark_model = GPT2LMHeadModel.from_pretrained("diabolic6045/tony_stark_chatbot")
-tony_stark_tokenizer = GPT2Tokenizer.from_pretrained("diabolic6045/tony_stark_chatbot")
-
-harry_potter_model = GPT2LMHeadModel.from_pretrained("diabolic6045/harry_potter_chatbot")
-harry_potter_tokenizer = GPT2Tokenizer.from_pretrained("diabolic6045/harry_potter_chatbot")
+# Hugging Face API
+API_TOKEN = "your_api_token"  # Replace this with your actual API token
+API_URL = "https://api-inference.huggingface.co/models/"
 
 
 def split_sentences(text):
@@ -19,19 +15,25 @@ def is_similar_to_input(sentence, user_input):
     return user_input.lower() in sentence.lower()
 
 
-def get_response(user_input, model, tokenizer, temperature=0.9, top_p=0.9):
-    input_ids = tokenizer.encode(user_input, return_tensors='pt')
-
-    # Create an attention mask
-    attention_mask = (input_ids != tokenizer.pad_token_id).float()
-
-    output = model.generate(input_ids, max_length=50, num_return_sequences=1, no_repeat_ngram_size=2,
-                            temperature=temperature, attention_mask=attention_mask, do_sample=True,
-                            top_p=top_p)
-    response = tokenizer.decode(output[0], skip_special_tokens=True)
+def get_response(user_input, model_name, temperature=0.9, top_p=0.9):
+    headers = {"Authorization": f"Bearer {API_TOKEN}"}
+    data = {
+        "inputs": user_input,
+        "options": {
+            "max_length": 50,
+            "num_return_sequences": 1,
+            "no_repeat_ngram_size": 2,
+            "temperature": temperature,
+            "top_p": top_p,
+            "stop_sequence": "\\n",
+        },
+    }
+    response = requests.post(API_URL + model_name, json=data, headers=headers)
+    response.raise_for_status()
+    generated_text = response.json()[0]['generated_text']
 
     # Split response into sentences
-    sentences = split_sentences(response)
+    sentences = split_sentences(generated_text)
 
     # Filter out sentences that are similar to the user_input
     filtered_sentences = [sentence for sentence in sentences if not is_similar_to_input(sentence, user_input)]
@@ -79,10 +81,11 @@ def main():
             session_state.conversation_history.append({"sender": "user", "text": user_input})
 
             if character == "Tony Stark":
-                response = get_response(user_input, tony_stark_model, tony_stark_tokenizer)
+                model_name = "diabolic6045/tony_stark_chatbot"
             elif character == "Harry Potter":
-                response = get_response(user_input, harry_potter_model, harry_potter_tokenizer)
+                model_name = "diabolic6045/harry_potter_chatbot"
 
+            response = get_response(user_input, model_name)
             session_state.conversation_history.append({"sender": "character", "text": f"<b>{character}:</b> {response}"})
             st.experimental_rerun()
 
