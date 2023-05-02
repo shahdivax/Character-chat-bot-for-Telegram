@@ -38,6 +38,7 @@ Note: above command is use to create ```tony_stark_dialogues.txt``` file , if yo
 python modelcreation.py
 ```
 Note: create models for both the characters and then move to step 6.
+
 6. Run `bot.py` to run the bot locally for one character at a time, or run `telegram_character-bot_runner.py` to start the bot on Telegram:
 ```
 python bot.py
