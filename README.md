@@ -37,7 +37,7 @@ python dialog_extractor.py
 python modelcreation.py
 ```
 
-6. Run `bot.py` to run the bot locally, or run `TelegramBotRunner_of_Tonystark.py` to start the bot on Telegram:
+6. Run `bot.py` to run the bot locally for one character at a time, or run `TelegramBotRunner_of_Tonystark.py` to start the bot on Telegram:
 ```
 python bot.py
 ```
@@ -45,6 +45,7 @@ or
 ```
 python TelegramBotRunner_of_Tonystark.py
 ```
+Note : run above command only after you have created models of both the characters
 
 7. Access the Telegram bot on [t.me/DJS_Movie_Characters_Bot](https://t.me/DJS_Movie_Characters_Bot) after running `TelegramBotRunner_of_Tonystark.py`.
 
