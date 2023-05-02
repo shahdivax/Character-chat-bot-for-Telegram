@@ -2,9 +2,9 @@ import streamlit as st
 import requests
 import re
 
-# Hugging Face API
-API_TOKEN = "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"  # Replace this with your actual API token
 API_URL = "https://api-inference.huggingface.co/models/"
+API_TOKEN = "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"  # Replace this with your actual API token
+headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
 
 def split_sentences(text):
@@ -16,8 +16,7 @@ def is_similar_to_input(sentence, user_input):
 
 
 def get_response(user_input, model_name, temperature=0.9, top_p=0.9):
-    headers = {"Authorization": f"Bearer {API_TOKEN}"}
-    data = {
+    payload = {
         "inputs": user_input,
         "options": {
             "max_length": 50,
@@ -28,8 +27,10 @@ def get_response(user_input, model_name, temperature=0.9, top_p=0.9):
             "stop_sequence": "\\n",
         },
     }
-    response = requests.post(API_URL + model_name, json=data, headers=headers)
-    response.raise_for_status()
+    with st.spinner("Connecting... Please wait."):
+        response = requests.post(API_URL + model_name, headers=headers, json=payload)
+        response.raise_for_status()
+
     generated_text = response.json()[0]['generated_text']
 
     # Split response into sentences
