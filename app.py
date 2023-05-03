@@ -1,6 +1,7 @@
 import streamlit as st
 import requests
 import re
+import time
 
 API_URL = "https://api-inference.huggingface.co/models/"
 API_TOKEN = "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"  # Replace this with your actual API token
@@ -27,9 +28,12 @@ def get_response(user_input, model_name, temperature=0.9, top_p=0.9):
             "stop_sequence": "\\n",
         },
     }
-    with st.spinner("Connecting... Please wait."):
-        response = requests.post(API_URL + model_name, headers=headers, json=payload)
+
+    try:
+        response = requests.post(API_URL + model_name, headers=headers, json=payload, timeout=10)
         response.raise_for_status()
+    except (requests.exceptions.RequestException, Exception):
+        return None
 
     generated_text = response.json()[0]['generated_text']
 
@@ -87,8 +91,15 @@ def main():
                 model_name = "diabolic6045/harry_potter_chatbot"
 
             response = get_response(user_input, model_name)
-            session_state.conversation_history.append({"sender": "character", "text": f"<b>{character}:</b> {response}"})
-            st.experimental_rerun()
+
+            if response is None:
+                st.markdown(f"<div style='background-color: rgba(255, 0, 0, 0.2); border-radius: 10px; padding: 10px; "
+                            f"color: white; margin-bottom: 10px;'><b>Error:</b> Please try again</div>",
+                            unsafe_allow_html=True)
+            else:
+                session_state.conversation_history.append(
+                    {"sender": "character", "text": f"<b>{character}:</b> {response}"})
+
 
 
 if __name__ == "__main__":
