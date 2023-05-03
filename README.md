@@ -2,7 +2,7 @@
 
 This repository contains a chat bot designed for Telegram that can chat like famous movie characters such as Tony Stark (Iron Man) and Harry Potter. Engage in fun conversations with your favorite characters and see how they would respond to you.
 
-Deployed on streamlit use here : https://shahdivax-ironman-chat-bot-for-telegram-app-lkay22.streamlit.app/
+Deployed on streamlit use here : https://shahdivax-character-chat-bot-for-telegram-app-5mli48.streamlit.app/
 
 ## Branch Information
 
